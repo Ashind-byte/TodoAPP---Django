@@ -1,0 +1,14 @@
+{% extends 'base.html' %}
+{% block title %}Delete Todo {{todo.id}} | {% endblock  %}
+{% block body %}
+
+<div class="container shadow bg-danger">
+    <div class="row p-2">
+    <form action="" method="POST">
+        {% csrf_token %}
+         Are you sure u want to delete?<input type="submit" name="Delete">
+        
+    </form>
+</div>
+ </div>
+{% endblock %}

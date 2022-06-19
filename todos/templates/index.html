@@ -1,0 +1,56 @@
+{% extends 'base.html' %}
+{% block title %}Home | {% endblock  %}
+{% block body %}
+<nav>
+    <div class="container"><h1>Welcome to TodoApp</h1></div>
+</nav>
+
+
+<div class="container mt-2">
+    <div class="row">
+        <div class="col-6">
+            <div class="container shadow rounded p-2 bg-secondary ">
+                <form  method="POST">
+                    {% csrf_token %}
+                    {{forms.as_p}}
+                    <button class=" btnbtn-success" type="Submit">Add Todo</button>
+                </form>
+            </div>
+
+        </div>
+        <div class="col-6 ">
+            <div class="container shadow rounded bg-secondary">
+                {% for todo in todos %}
+                <div class="row">
+                    <div class="col">
+                        <div class="col-9">
+                            <h3>Todo </h3>
+                            <p><strong>Title :</strong>  {{ todo.title}}</p>
+                            <p><strong>Description:</strong> {{todo.description}}</p>
+                            <p><strong>Date added :</strong> {{todo.pub_date}}</p>
+                            <p><strong> Did you complete? :</strong>{{todo.is_done}}</p>
+                        
+                        </div>
+                        <div class="col-3">
+                           <p><a style="color:black ;" href="{% url 'update' todo.id %}">  Edit Todo<span class="px-2"><i class="fa fa-light fa-pen-to-square"></i></span></p> </a>
+                           <span>
+                           <p><a href="{% url 'delete' todo.id %}" style="color:black">Delete Todo<span class="px-2"><i class=" fa fa-light fa-trash"></i></span></p></a>
+                        </span>
+                        </div>
+
+                        <hr >
+                        
+            
+                    </div>
+                </div>  
+                {% empty %}
+                <p>No Todos Yet! Go ahead and Add one</p>
+                {% endfor %}
+            </div>
+
+        </div>
+    </div>
+</div>
+
+
+{% endblock  %}
